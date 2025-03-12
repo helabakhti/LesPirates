@@ -11,7 +11,7 @@ public class CarteDefense extends Cartes {
 
     @Override
     public void appliquerEffet(Joueur joueurActuel, Joueur adversaire) {
-        System.out.println("🛡️ " + joueurActuel.getNom() + " joue " + getNomCarte() + " et évite une attaque !");
+        System.out.println(" Defense ");
         joueurActuel.ajouterPopularite(1);
     }
 
@@ -19,3 +19,4 @@ public class CarteDefense extends Cartes {
 		return valeur;
 	}
 }
+

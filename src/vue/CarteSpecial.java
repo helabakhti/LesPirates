@@ -1,5 +1,7 @@
 package vue;
 
+import java.util.Random;
+
 class CarteSpeciale extends CartePopularite {
     private int perteVie;
     private TypeCarteSpeciale type;
@@ -23,13 +25,28 @@ class CarteSpeciale extends CartePopularite {
             }
             joueur.retirerVie(perteVie);
         } else if (type == TypeCarteSpeciale.TRESOR_MAUDIT) {
-            // Effet Trésor Maudit : Vole 2 points sans perte de vie
+            // Effet Trésor Maudit : Vole 2 pop 
             if (adversaire.getPopularite() >= ptPopularite) {
                 adversaire.ajouterPopularite(-ptPopularite);
                 joueur.ajouterPopularite(ptPopularite);
             } else {
                 joueur.ajouterPopularite(adversaire.getPopularite());
                 adversaire.setPopularite(0);
+            }
+        }
+        // Effet Sabotage et chanage - L'adversaire perd une carte aléatoire
+        else if (type == TypeCarteSpeciale.CHANTAGE || type == TypeCarteSpeciale.SABOTAGE ) {
+            // Vérifier si l'adversaire a des cartes à perdre
+            if (!adversaire.getMain().isEmpty()) {
+                // Sélectionner une carte aléatoire dans la main de l'adversaire
+                Random random = new Random();
+                int indexAleatoire = random.nextInt(adversaire.getMain().size());
+                
+                // Retirer cette carte de la main de l'adversaire
+                Cartes cartePerdue = adversaire.getMain().remove(indexAleatoire);
+                System.out.println(adversaire.getNom() + " perd la carte : " + cartePerdue.getNomCarte());
+            } else {
+                System.out.println(adversaire.getNom() + " n'a pas de cartes à perdre.");
             }
         }
     }

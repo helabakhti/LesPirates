@@ -9,8 +9,8 @@ public class Joueur {
     private String nom;
     private int vie;
     private int popularite;
-    private List<Cartes> main;  // Utilisation d'une liste
-    private List<Cartes> pioche; // Liste pour gérer la pioche
+    private List<Cartes> main; 
+    private List<Cartes> pioche; 
     private static Scanner scanner = new Scanner(System.in);
 
     public Joueur(String nom) {
@@ -25,6 +25,7 @@ public class Joueur {
     public String getNom() {
         return nom;
     }
+    
 
     public int getVie() {
         return vie;
@@ -55,7 +56,7 @@ public class Joueur {
     }
 
     public void afficherEtat() {
-        System.out.println(nom + " : " + vie + " ❤️, " + popularite + " ⭐ Popularité");
+        System.out.println(nom + " : " + vie + " vie , " + popularite + " Popularité");
     }
 
     // Vérifie si le joueur a gagné
@@ -72,7 +73,7 @@ public class Joueur {
         if (main.size() < 5) {
             main.add(carte);
         } else {
-            System.out.println("❌ La main de " + nom + " est pleine !");
+            System.out.println(" La main de " + nom + " est pleine ");
         }
     }
 
@@ -89,10 +90,9 @@ public class Joueur {
     // Piocher une carte pour compléter la main (5 cartes max)
     public void piocherCarte() {
         if (!pioche.isEmpty() && main.size() < 5) {
-            main.add(pioche.remove(0)); // Prendre la première carte de la pioche
-            System.out.println(nom + " a pioché une nouvelle carte.");
+            main.add(pioche.remove(0)); 
         } else {
-            System.out.println("⚠️ La pioche est vide !");
+            System.out.println("pioche vide");
         }
     }
 
@@ -108,19 +108,19 @@ public class Joueur {
     // Affichage des cartes en main
     public void afficherMain() {
         if (main.isEmpty()) {
-            System.out.println(nom + " n'a aucune carte en main.");
+            System.out.println(nom + " n'a aucune carte en main");
         } else {
-            System.out.println("\n🎴 Main de " + nom + " :");
+            System.out.println("\n Main de " + nom + " :");
             for (int i = 0; i < main.size(); i++) {
                 System.out.println((i + 1) + ". " + main.get(i).getNomCarte() + " - " + main.get(i).getDescriptionCarte());
             }
         }
     }
 
-    // Le joueur choisit une carte à jouer
+    // choisir une carte à jouer
     public int choisirCarte() {
         if (main.isEmpty()) {
-            System.out.println(nom + " n'a pas de cartes à jouer.");
+            System.out.println(nom + " n'a pas de cartes à jouer");
             return -1;
         }
 
@@ -128,12 +128,15 @@ public class Joueur {
         do {
             System.out.print(nom + ", choisissez une carte à jouer (1-" + main.size() + ") : ");
             while (!scanner.hasNextInt()) {
-                System.out.println("Veuillez entrer un nombre valide.");
+                System.out.println("Veuillez entrer un nombre valide");
                 scanner.next();
             }
             numCarte = scanner.nextInt();
         } while (numCarte < 1 || numCarte > main.size());
 
-        return numCarte - 1; // Retourne l'index correct
+        return numCarte - 1; 
     }
+
+   
+
 }

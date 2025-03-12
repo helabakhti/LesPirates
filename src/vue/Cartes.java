@@ -1,6 +1,6 @@
 package vue;
 
-abstract class Cartes {
+public abstract class Cartes {  
     protected String nom;
     protected String description;
     protected int numCarte;
@@ -18,6 +18,7 @@ abstract class Cartes {
     public int getNumeroCarte() {
         return numCarte;
     }
+
     public String getDescriptionCarte() {
         return description;
     }
