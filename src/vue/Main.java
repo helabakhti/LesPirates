@@ -19,17 +19,17 @@ public class Main {
             new CarteAttaque("Coup de sabre", " -2 Vie", 4, 2),
             new CarteDefense("Évasion Spectaculaire", "Ignore une attaque et gagne 1 popularité", 5, 1),
             new CarteAttaque("Canon en Feu", "-3 Vie ", 5, 3),
-            new CarteSpeciale("Sabotage", "L'adversaire perd une carte aléatoire", 6, 0, 0, TypeCarteSpeciale.SABOTAGE),
+            new CarteSpeciale("Sabotage", "L'adversaire perd une carte d'attaque", 6, 0, 0, TypeCarteSpeciale.SABOTAGE),
             new CartePopularite("Discours de Capitaine", " +2 Popularité", 7, 2),
             new CartePopularite("Main de fer", "+3 Popularité", 8, 3),
-            new CarteDefense("Bouclier Magique", "protection du prochain coup et regagne 1 vie", 9, 1),
-            new CarteAttaque("Tempête de Sable", "Inflige -3 Vie et empêche de jouer une carte au prochain tour", 10, 3),
+            new CarteDefense("Bouclier Magique", "gagne 1 vie de plus", 9, 1),
+            new CarteAttaque("Tempête de Sable", "-3 Vie ", 10, 3),
             new CartePopularite("Charisme Naturel", "+3 Popularité", 11, 3),
-            new CarteAttaque("Tornade Dévastatrice", "-3 Vie mais perd 1 popularité", 12, 5),
-            new CarteSpeciale("Chantage", "L'adversaire perd une carte", 17, 0, 0, TypeCarteSpeciale.CHANTAGE)
+            new CarteAttaque("Tornade Dévastatrice KO", "-5 Vie ", 12, 5),
+            new CarteSpeciale("Chantage", "L'adversaire perd une carte", 13, 0, 0, TypeCarteSpeciale.CHANTAGE)
         };
 
-        // Distribution des cartes (en copiant les éléments du tableau)
+        // Distribution des cartes 
         for (int i = 0; i < 3; i++) {  // 3 exemplaires de chaque carte
             for (Cartes carte : cartesDisponibles) {
                 joueur1.ajouterCarteDansPioche(carte);
@@ -60,6 +60,7 @@ public class Main {
                 joueurActuel.piocherCarte();
             }
 
+       
             joueurActuel.afficherEtat();
             adversaire.afficherEtat();
             joueurActuel.afficherMain();

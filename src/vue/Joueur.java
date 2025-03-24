@@ -54,6 +54,10 @@ public class Joueur {
     public void retirerVie(int points) {
         this.vie -= points;
     }
+    
+    public void ajouterVie(int points) {
+        this.vie += points; 	
+    }
 
     public void afficherEtat() {
         System.out.println(nom + " : " + vie + " vie , " + popularite + " Popularité");

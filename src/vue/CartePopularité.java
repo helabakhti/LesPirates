@@ -1,7 +1,7 @@
 package vue;
 
 class CartePopularite extends Cartes {
-    protected int ptPopularite;
+    public int ptPopularite;
 
     public CartePopularite(String nom, String description, int numCarte, int ptPopularite) {
         super(nom, description, numCarte);

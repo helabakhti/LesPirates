@@ -2,20 +2,23 @@ package vue;
 
 import java.util.Random;
 
-class CarteSpeciale extends CartePopularite {
+class CarteSpeciale extends Cartes {
     private int perteVie;
+    private int ptPopularite;
     private TypeCarteSpeciale type;
 
     public CarteSpeciale(String nom, String description, int numCarte, int ptPopularite, int perteVie, TypeCarteSpeciale type) {
-        super(nom, description, numCarte, ptPopularite);
+        super(nom, description, numCarte);
         this.perteVie = perteVie;
+        this.ptPopularite = ptPopularite;
         this.type = type;
     }
 
     @Override
     public void appliquerEffet(Joueur joueur, Joueur adversaire) {
         if (type == TypeCarteSpeciale.HEROS_TRAITRE) {
-            // Effet Héros Traître : Vole 2 points et perd 1 point de vie
+        	
+            // Héros Traître : Vole 2 points et perd 1 point de vie pour sa trahison
             if (adversaire.getPopularite() >= ptPopularite) {
                 adversaire.ajouterPopularite(-ptPopularite);
                 joueur.ajouterPopularite(ptPopularite);
@@ -25,7 +28,7 @@ class CarteSpeciale extends CartePopularite {
             }
             joueur.retirerVie(perteVie);
         } else if (type == TypeCarteSpeciale.TRESOR_MAUDIT) {
-            // Effet Trésor Maudit : Vole 2 pop 
+            //Trésor Maudit : Vole 2 popularité
             if (adversaire.getPopularite() >= ptPopularite) {
                 adversaire.ajouterPopularite(-ptPopularite);
                 joueur.ajouterPopularite(ptPopularite);
@@ -34,19 +37,31 @@ class CarteSpeciale extends CartePopularite {
                 adversaire.setPopularite(0);
             }
         }
-        // Effet Sabotage et chanage - L'adversaire perd une carte aléatoire
-        else if (type == TypeCarteSpeciale.CHANTAGE || type == TypeCarteSpeciale.SABOTAGE ) {
-            // Vérifier si l'adversaire a des cartes à perdre
-            if (!adversaire.getMain().isEmpty()) {
-                // Sélectionner une carte aléatoire dans la main de l'adversaire
-                Random random = new Random();
-                int indexAleatoire = random.nextInt(adversaire.getMain().size());
-                
-                // Retirer cette carte de la main de l'adversaire
-                Cartes cartePerdue = adversaire.getMain().remove(indexAleatoire);
+        
+        //Sabotage et Chantage : L'adversaire perd une carte aléatoire
+        else if (type == TypeCarteSpeciale.CHANTAGE || type == TypeCarteSpeciale.SABOTAGE) {
+            if (adversaire == null) {
+                System.out.println("Erreur : adversaire est null !");
+                return;
+            }
+
+            if (adversaire.getMain() == null || adversaire.getMain().isEmpty()) {
+                System.out.println(adversaire.getNom() + " n'a pas de cartes à perdre");
+                return;
+            }
+
+            // selectionner une carte aléatoire dans la main de l'adversaire et le retirer
+            Random random = new Random();
+            int indexAleatoire = random.nextInt(adversaire.getMain().size());
+            System.out.println("Index aléatoire sélectionné : " + indexAleatoire);
+
+     
+            Cartes cartePerdue = adversaire.getMain().remove(indexAleatoire);
+            
+            if (cartePerdue != null) {
                 System.out.println(adversaire.getNom() + " perd la carte : " + cartePerdue.getNomCarte());
             } else {
-                System.out.println(adversaire.getNom() + " n'a pas de cartes à perdre.");
+                System.out.println("Erreur");
             }
         }
     }

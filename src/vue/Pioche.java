@@ -18,27 +18,28 @@ public class Pioche {
     // Ajouter une carte à la pioche 
     public void ajouterCarte(Cartes carte) {
         if (carte == null) {
-            System.err.println("Tentative d'ajout d'une carte nulle ");
+            System.err.println("erreur:Tentative d'ajout d'une carte nulle ");
             return;
         }
         if (taille < cartes.length) {
             cartes[taille] = carte;
             taille++;
         } else {
-            System.err.println("La pioche est pleine, impossible d'ajouter plus de cartes");
+            System.err.println("erreur: La pioche est pleine, impossible d'ajouter plus de cartes");
         }
     }
 
     // melanger la pioche
     public void melanger() {
-        // Transformer en liste pour les melanger puis le remettre en tableau
+        // Transformer en liste puis le remettre en tableau
         List<Cartes> listeTemp = Arrays.asList(Arrays.copyOf(cartes, taille));
+        //mélanger aléatoirement
         Collections.shuffle(listeTemp);
         cartes = listeTemp.toArray(new Cartes[0]);
         position = 0; //
     }
 
-    // Piocher une carte (retourne null si la pioche est vide)
+    // Piocher une carte
     public Cartes piocherCarte() {
         if (position < taille) {
             return cartes[position++]; // Retourne la carte actuelle et incrémente 

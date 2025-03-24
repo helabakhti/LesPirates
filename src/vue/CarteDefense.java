@@ -13,6 +13,7 @@ public class CarteDefense extends Cartes {
     public void appliquerEffet(Joueur joueurActuel, Joueur adversaire) {
         System.out.println(" Defense ");
         joueurActuel.ajouterPopularite(1);
+        joueurActuel.ajouterVie(1);
     }
 
 	public int getValeur() {
